@@ -208,6 +208,10 @@ public class Client {
         this.account = account;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
