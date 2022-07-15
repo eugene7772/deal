@@ -6,6 +6,7 @@ import com.creditpipeline.deal.entity.Client;
 import com.creditpipeline.deal.enums.Status;
 import com.creditpipeline.deal.service.ApplicationService;
 import com.creditpipeline.deal.service.ClientService;
+import com.creditpipeline.deal.service.ScoringDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -23,15 +24,17 @@ public class Deal {
 
     private final ClientService clientService;
     private final ApplicationService applicationService;
+    private final ScoringDataService scoringDataService;
     private final RestTemplate restTemplate;
     private final static Logger logger = LogManager.getLogger(Deal.class);
     private final static String url = "http://localhost:8087/conveyor/offers";
     private final static String url2 = "http://localhost:8087/conveyor/calculation";
 
-    public Deal(ClientService clientService, ApplicationService applicationService, RestTemplate restTemplate) {
+    public Deal(ClientService clientService, ApplicationService applicationService, RestTemplate restTemplate, ScoringDataService scoringDataService) {
         this.clientService = clientService;
         this.applicationService = applicationService;
         this.restTemplate = restTemplate;
+        this.scoringDataService = scoringDataService;
     }
 
     @PostMapping(value = "/application")
@@ -71,6 +74,7 @@ public class Deal {
         Application application = applicationService.getApplicationById(loanOfferDTO.getApplicationId()).get();
         logger.debug("Create application" + application.getId() + " " + application.getClient() + " " + application.getCredit() + " " + application.getStatus() +
                 " " + application.getCreationDate() + " " + application.getAppliedOffer() + " " + application.getSignDate() + " " + application.getSesCode() + " " + application.getStatusHistory());
+
         List<ApplicationStatusHistoryDTO> history = application.getStatusHistory();
         ApplicationStatusHistoryDTO statusHistoryDTO = new ApplicationStatusHistoryDTO();
         statusHistoryDTO.setStatus(Status.APPROVED);
@@ -90,25 +94,7 @@ public class Deal {
 
         Application application = applicationService.getApplicationById(applicationId).get();
 
-        ScoringDataDTO scoringDataDTO = new ScoringDataDTO();
-
-        scoringDataDTO.setAccount(finishRegistrationRequestDTO.getAccount());
-        scoringDataDTO.setAmount(application.getCredit().getAmount());
-        scoringDataDTO.setTerm(application.getCredit().getTerm());
-        scoringDataDTO.setFirstName(application.getClient().getFirstName());
-        scoringDataDTO.setMiddleName(application.getClient().getMiddleName());
-        scoringDataDTO.setLastName(application.getClient().getLastName());
-        scoringDataDTO.setGender(finishRegistrationRequestDTO.getGender());
-        scoringDataDTO.setBirthdate(application.getClient().getBirthdate());
-        scoringDataDTO.setPassportSeries(application.getClient().getPassportSeries());
-        scoringDataDTO.setPassportNumber(application.getClient().getPassportNumber());
-        scoringDataDTO.setPassportIssueDate(finishRegistrationRequestDTO.getPassportIssueDate());
-        scoringDataDTO.setPassportIssueBranch(finishRegistrationRequestDTO.getPassportIssueBranch());
-        scoringDataDTO.setMaritalStatus(finishRegistrationRequestDTO.getMaritalStatus());
-        scoringDataDTO.setDependentAmount(finishRegistrationRequestDTO.getDependentAmount());
-        scoringDataDTO.setEmploymentDTO(finishRegistrationRequestDTO.getEmploymentDTO());
-        scoringDataDTO.setInsuranceEnabled(application.getCredit().getInsuranceEnabled());
-        scoringDataDTO.setSalaryClient(application.getCredit().getSalaryClient());
+        ScoringDataDTO scoringDataDTO = scoringDataService.getScoringDataDTO(application, finishRegistrationRequestDTO);
 
         restTemplate.postForEntity(url2, scoringDataDTO, PostMapping.class);
         logger.debug("Post scoringDataDTO to conveyor: " + scoringDataDTO);
