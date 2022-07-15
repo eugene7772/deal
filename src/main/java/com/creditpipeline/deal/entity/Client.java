@@ -1,6 +1,11 @@
 package com.creditpipeline.deal.entity;
 
+import com.creditpipeline.deal.dto.EmploymentDTO;
+import com.creditpipeline.deal.dto.LoanApplicationRequestDTO;
+import com.creditpipeline.deal.enums.EmploymentStatus;
+import com.creditpipeline.deal.enums.Gender;
 import com.creditpipeline.deal.enums.MaritalStatus;
+import com.creditpipeline.deal.enums.Position;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,25 +18,39 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id_client")
     private Long id;
-    private String last_name;
-    private String first_name;
-    private String middle_name;
-    private LocalDate birth_date;
+    private String lastName;
+    private String firstName;
+    private String middleName;
+    private LocalDate birthdate;
     private String email;
-    private String gender;
+    private Gender gender;
     private MaritalStatus maritalStatus;
     private Integer dependentAmount;
     private String passportSeries;
     private String passportNumber;
     private LocalDate issueDate;
     private String issueBranch;
-    private String employmentStatus;
-    private String employer;
+    private EmploymentStatus employmentStatus;
+    private EmploymentDTO employer;
     private Integer salary;
-    private String position;
+    private Position position;
     private Integer workExperienceTotal;
     private Integer workExperienceCurrent;
-    private Integer account;
+    private String account;
+
+    public Client(LoanApplicationRequestDTO loanApplicationRequestDTO) {
+        lastName = loanApplicationRequestDTO.getLastName();
+        firstName = loanApplicationRequestDTO.getFirstName();
+        middleName = loanApplicationRequestDTO.getMiddleName();
+        birthdate = loanApplicationRequestDTO.getBirthdate();
+        email = loanApplicationRequestDTO.getEmail();
+        passportSeries = loanApplicationRequestDTO.getPassportSeries();
+        passportNumber = loanApplicationRequestDTO.getPassportNumber();
+
+    }
+    public Client(){
+
+    }
 
     public Long getId() {
         return id;
@@ -41,36 +60,36 @@ public class Client {
         this.id = id;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getMiddle_name() {
-        return middle_name;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddle_name(String middle_name) {
-        this.middle_name = middle_name;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public LocalDate getBirth_date() {
-        return birth_date;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirth_date(LocalDate birth_date) {
-        this.birth_date = birth_date;
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 
     public String getEmail() {
@@ -81,11 +100,11 @@ public class Client {
         this.email = email;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -137,20 +156,24 @@ public class Client {
         this.issueBranch = issueBranch;
     }
 
-    public String getEmploymentStatus() {
+    public EmploymentStatus getEmploymentStatus() {
         return employmentStatus;
     }
 
-    public void setEmploymentStatus(String employmentStatus) {
+    public void setEmploymentStatus(EmploymentStatus employmentStatus) {
         this.employmentStatus = employmentStatus;
     }
 
-    public String getEmployer() {
+    public EmploymentDTO getEmployer() {
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(EmploymentDTO employer) {
         this.employer = employer;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public Integer getSalary() {
@@ -159,14 +182,6 @@ public class Client {
 
     public void setSalary(Integer salary) {
         this.salary = salary;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 
     public Integer getWorkExperienceTotal() {
@@ -185,11 +200,11 @@ public class Client {
         this.workExperienceCurrent = workExperienceCurrent;
     }
 
-    public Integer getAccount() {
+    public String getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public void setAccount(String account) {
         this.account = account;
     }
 
@@ -197,10 +212,10 @@ public class Client {
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", last_name='" + last_name + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", middle_name='" + middle_name + '\'' +
-                ", birth_date=" + birth_date +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", birthdate=" + birthdate +
                 ", email='" + email + '\'' +
                 ", gender='" + gender + '\'' +
                 ", maritalStatus=" + maritalStatus +

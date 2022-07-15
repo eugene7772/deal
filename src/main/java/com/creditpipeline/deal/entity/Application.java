@@ -1,7 +1,12 @@
 package com.creditpipeline.deal.entity;
 
+import com.creditpipeline.deal.dto.ApplicationStatusHistoryDTO;
+import com.creditpipeline.deal.dto.LoanOfferDTO;
+import com.creditpipeline.deal.enums.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="application")
@@ -19,12 +24,12 @@ public class Application {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_credit")
     private Credit credit;
-    private String status;
+    private Status status;
     private LocalDate creationDate;
-    private Boolean appliedOffer;
+    private LoanOfferDTO appliedOffer;
     private LocalDate signDate;
     private String sesCode;
-    private String statusHistory;
+    private List<ApplicationStatusHistoryDTO> statusHistory;
 
     public Long getId() {
         return id;
@@ -50,11 +55,11 @@ public class Application {
         this.credit = credit;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -66,11 +71,11 @@ public class Application {
         this.creationDate = creationDate;
     }
 
-    public Boolean getAppliedOffer() {
+    public LoanOfferDTO getAppliedOffer() {
         return appliedOffer;
     }
 
-    public void setAppliedOffer(Boolean appliedOffer) {
+    public void setAppliedOffer(LoanOfferDTO appliedOffer) {
         this.appliedOffer = appliedOffer;
     }
 
@@ -90,11 +95,11 @@ public class Application {
         this.sesCode = sesCode;
     }
 
-    public String getStatusHistory() {
+    public List<ApplicationStatusHistoryDTO> getStatusHistory() {
         return statusHistory;
     }
 
-    public void setStatusHistory(String statusHistory) {
+    public void setStatusHistory(List<ApplicationStatusHistoryDTO> statusHistory) {
         this.statusHistory = statusHistory;
     }
 
@@ -103,13 +108,13 @@ public class Application {
         return "Application{" +
                 "id=" + id +
                 ", client=" + client +
-                ", credit='" + credit + '\'' +
-                ", status='" + status + '\'' +
+                ", credit=" + credit +
+                ", status=" + status +
                 ", creationDate=" + creationDate +
                 ", appliedOffer=" + appliedOffer +
                 ", signDate=" + signDate +
                 ", sesCode='" + sesCode + '\'' +
-                ", statusHistory='" + statusHistory + '\'' +
+                ", statusHistory=" + statusHistory +
                 '}';
     }
 }

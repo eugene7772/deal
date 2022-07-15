@@ -1,6 +1,11 @@
 package com.creditpipeline.deal.entity;
 
+import com.creditpipeline.deal.dto.PaymentScheduleElement;
+import com.creditpipeline.deal.enums.CreditStatus;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name="credit")
@@ -9,15 +14,15 @@ public class Credit {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id_credit")
     private Long id;
-    private Integer amount;
+    private BigDecimal amount;
     private Integer term;
     private Integer monthlyPayment;
     private Integer rate;
     private Integer psk;
-    private String payment_schedule;
+    private List<PaymentScheduleElement> paymentSchedule;
     private Boolean isInsuranceEnabled;
     private Boolean isSalaryClient;
-    private String creditStatus;
+    private CreditStatus creditStatus;
 
     public Long getId() {
         return id;
@@ -27,11 +32,11 @@ public class Credit {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -67,12 +72,12 @@ public class Credit {
         this.psk = psk;
     }
 
-    public String getPayment_schedule() {
-        return payment_schedule;
+    public List<PaymentScheduleElement> getPaymentSchedule() {
+        return paymentSchedule;
     }
 
-    public void setPayment_schedule(String payment_schedule) {
-        this.payment_schedule = payment_schedule;
+    public void setPaymentSchedule(List<PaymentScheduleElement> paymentSchedule) {
+        this.paymentSchedule = paymentSchedule;
     }
 
     public Boolean getInsuranceEnabled() {
@@ -91,11 +96,11 @@ public class Credit {
         isSalaryClient = salaryClient;
     }
 
-    public String getCreditStatus() {
+    public CreditStatus getCreditStatus() {
         return creditStatus;
     }
 
-    public void setCreditStatus(String creditStatus) {
+    public void setCreditStatus(CreditStatus creditStatus) {
         this.creditStatus = creditStatus;
     }
 
@@ -108,10 +113,10 @@ public class Credit {
                 ", monthlyPayment=" + monthlyPayment +
                 ", rate=" + rate +
                 ", psk=" + psk +
-                ", payment_schedule='" + payment_schedule + '\'' +
+                ", paymentSchedule=" + paymentSchedule +
                 ", isInsuranceEnabled=" + isInsuranceEnabled +
                 ", isSalaryClient=" + isSalaryClient +
-                ", creditStatus='" + creditStatus + '\'' +
+                ", creditStatus=" + creditStatus +
                 '}';
     }
 }
