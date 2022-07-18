@@ -1,6 +1,5 @@
 package com.creditpipeline.deal.entity;
 
-import com.creditpipeline.deal.dto.PaymentScheduleElement;
 import com.creditpipeline.deal.enums.CreditStatus;
 
 import javax.persistence.*;
@@ -19,6 +18,9 @@ public class Credit {
     private Integer monthlyPayment;
     private Integer rate;
     private Integer psk;
+
+    @Column
+    @ElementCollection(targetClass = PaymentScheduleElement.class)
     private List<PaymentScheduleElement> paymentSchedule;
     private Boolean isInsuranceEnabled;
     private Boolean isSalaryClient;

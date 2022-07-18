@@ -1,15 +1,29 @@
-package com.creditpipeline.deal.dto;
+package com.creditpipeline.deal.entity;
 
 import com.creditpipeline.deal.enums.EmploymentStatus;
 import com.creditpipeline.deal.enums.Position;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Data
-@Schema(description = "Сущность работника")
+@Entity
+@Table(name="employee")
 public class EmploymentDTO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JoinColumn(name = "id_employee")
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     private EmploymentStatus employmentStatus;
 
@@ -74,7 +88,8 @@ public class EmploymentDTO {
     @Override
     public String toString() {
         return "EmploymentDTO{" +
-                "employmentStatus=" + employmentStatus +
+                "id=" + id +
+                ", employmentStatus=" + employmentStatus +
                 ", employerINN='" + employerINN + '\'' +
                 ", salary=" + salary +
                 ", position=" + position +

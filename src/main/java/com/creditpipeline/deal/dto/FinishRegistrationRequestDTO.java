@@ -1,5 +1,6 @@
 package com.creditpipeline.deal.dto;
 
+import com.creditpipeline.deal.entity.EmploymentDTO;
 import com.creditpipeline.deal.enums.Gender;
 import com.creditpipeline.deal.enums.MaritalStatus;
 import io.swagger.v3.oas.annotations.media.Schema;

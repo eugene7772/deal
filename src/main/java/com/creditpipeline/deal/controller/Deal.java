@@ -2,7 +2,9 @@ package com.creditpipeline.deal.controller;
 
 import com.creditpipeline.deal.dto.*;
 import com.creditpipeline.deal.entity.Application;
+import com.creditpipeline.deal.entity.ApplicationStatusHistoryDTO;
 import com.creditpipeline.deal.entity.Client;
+import com.creditpipeline.deal.entity.LoanOfferDTO;
 import com.creditpipeline.deal.enums.Status;
 import com.creditpipeline.deal.service.ApplicationService;
 import com.creditpipeline.deal.service.ClientService;
@@ -25,15 +27,14 @@ public class Deal {
     private final ClientService clientService;
     private final ApplicationService applicationService;
     private final ScoringDataService scoringDataService;
-    private final RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
     private final static Logger logger = LogManager.getLogger(Deal.class);
     private final static String url = "http://localhost:8087/conveyor/offers";
     private final static String url2 = "http://localhost:8087/conveyor/calculation";
 
-    public Deal(ClientService clientService, ApplicationService applicationService, RestTemplate restTemplate, ScoringDataService scoringDataService) {
+    public Deal(ClientService clientService, ApplicationService applicationService, ScoringDataService scoringDataService) {
         this.clientService = clientService;
         this.applicationService = applicationService;
-        this.restTemplate = restTemplate;
         this.scoringDataService = scoringDataService;
     }
 

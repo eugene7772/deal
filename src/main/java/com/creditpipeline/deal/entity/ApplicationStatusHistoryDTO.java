@@ -1,14 +1,32 @@
-package com.creditpipeline.deal.dto;
+package com.creditpipeline.deal.entity;
 
 import com.creditpipeline.deal.enums.Status;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name="history")
 public class ApplicationStatusHistoryDTO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JoinColumn(name = "id_history")
+    private Long id;
 
     private Status status;
     private LocalDate time;
     private Status changeType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Status getStatus() {
         return status;

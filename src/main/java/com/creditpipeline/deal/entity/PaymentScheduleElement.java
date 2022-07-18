@@ -1,14 +1,20 @@
-package com.creditpipeline.deal.dto;
+package com.creditpipeline.deal.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
-@Schema(description = "Сущность элемента графика платежа")
+@Entity
+@Table(name="payment")
 public class PaymentScheduleElement {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JoinColumn(name = "id_payment")
+    private Long id;
 
     private Integer number;
 
@@ -21,6 +27,14 @@ public class PaymentScheduleElement {
     private BigDecimal debtPayment;
 
     private BigDecimal remainingDebt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Integer getNumber() {
         return number;
@@ -73,7 +87,8 @@ public class PaymentScheduleElement {
     @Override
     public String toString() {
         return "PaymentScheduleElement{" +
-                "number=" + number +
+                "id=" + id +
+                ", number=" + number +
                 ", date=" + date +
                 ", totalPayment=" + totalPayment +
                 ", interestPayment=" + interestPayment +
@@ -81,5 +96,4 @@ public class PaymentScheduleElement {
                 ", remainingDebt=" + remainingDebt +
                 '}';
     }
-
 }

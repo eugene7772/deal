@@ -1,6 +1,5 @@
 package com.creditpipeline.deal.entity;
 
-import com.creditpipeline.deal.dto.EmploymentDTO;
 import com.creditpipeline.deal.dto.LoanApplicationRequestDTO;
 import com.creditpipeline.deal.enums.EmploymentStatus;
 import com.creditpipeline.deal.enums.Gender;
@@ -31,6 +30,9 @@ public class Client {
     private LocalDate issueDate;
     private String issueBranch;
     private EmploymentStatus employmentStatus;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_credit")
     private EmploymentDTO employer;
     private Integer salary;
     private Position position;

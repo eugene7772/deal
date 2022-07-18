@@ -1,7 +1,5 @@
 package com.creditpipeline.deal.entity;
 
-import com.creditpipeline.deal.dto.ApplicationStatusHistoryDTO;
-import com.creditpipeline.deal.dto.LoanOfferDTO;
 import com.creditpipeline.deal.enums.Status;
 
 import javax.persistence.*;
@@ -14,7 +12,7 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinColumn(name = "id_client")
+    @JoinColumn(name = "id_application")
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -24,11 +22,20 @@ public class Application {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_credit")
     private Credit credit;
+
+    @Enumerated(EnumType.ORDINAL)
     private Status status;
     private LocalDate creationDate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_offer")
     private LoanOfferDTO appliedOffer;
+
     private LocalDate signDate;
     private String sesCode;
+
+    @Column
+    @ElementCollection(targetClass = ApplicationStatusHistoryDTO.class)
     private List<ApplicationStatusHistoryDTO> statusHistory;
 
     public Long getId() {
