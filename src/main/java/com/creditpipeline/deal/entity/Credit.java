@@ -11,7 +11,6 @@ import java.util.List;
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinColumn(name = "id_credit")
     private Long id;
     private BigDecimal amount;
     private Integer term;
@@ -22,6 +21,7 @@ public class Credit {
     @Column
     @ElementCollection(targetClass = PaymentScheduleElement.class)
     private List<PaymentScheduleElement> paymentSchedule;
+
     private Boolean isInsuranceEnabled;
     private Boolean isSalaryClient;
     private CreditStatus creditStatus;

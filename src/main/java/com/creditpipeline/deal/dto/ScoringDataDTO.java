@@ -1,6 +1,6 @@
 package com.creditpipeline.deal.dto;
 
-import com.creditpipeline.deal.entity.EmploymentDTO;
+import com.creditpipeline.deal.entity.Employment;
 import com.creditpipeline.deal.enums.Gender;
 import com.creditpipeline.deal.enums.MaritalStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -61,7 +61,7 @@ public class ScoringDataDTO {
     private Integer dependentAmount;
 
     @NotNull
-    private EmploymentDTO employmentDTO;
+    private Employment employment;
 
     @NotNull
     private String account;
@@ -176,12 +176,12 @@ public class ScoringDataDTO {
         this.dependentAmount = dependentAmount;
     }
 
-    public EmploymentDTO getEmploymentDTO() {
-        return employmentDTO;
+    public Employment getEmployment() {
+        return employment;
     }
 
-    public void setEmploymentDTO(EmploymentDTO employmentDTO) {
-        this.employmentDTO = employmentDTO;
+    public void setEmployment(Employment employment) {
+        this.employment = employment;
     }
 
     public String getAccount() {
@@ -224,7 +224,7 @@ public class ScoringDataDTO {
                 ", passportIssueBranch='" + passportIssueBranch + '\'' +
                 ", maritalStatus=" + maritalStatus +
                 ", dependentAmount=" + dependentAmount +
-                ", employmentDTO=" + employmentDTO +
+                ", employment=" + employment +
                 ", account='" + account + '\'' +
                 ", isInsuranceEnabled=" + isInsuranceEnabled +
                 ", isSalaryClient=" + isSalaryClient +

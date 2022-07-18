@@ -1,8 +1,5 @@
 package com.creditpipeline.deal.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +10,6 @@ public class PaymentScheduleElement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinColumn(name = "id_payment")
     private Long id;
 
     private Integer number;

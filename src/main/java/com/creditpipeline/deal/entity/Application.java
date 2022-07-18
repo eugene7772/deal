@@ -12,7 +12,6 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinColumn(name = "id_application")
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -35,8 +34,8 @@ public class Application {
     private String sesCode;
 
     @Column
-    @ElementCollection(targetClass = ApplicationStatusHistoryDTO.class)
-    private List<ApplicationStatusHistoryDTO> statusHistory;
+    @ElementCollection(targetClass = ApplicationStatusHistory.class)
+    private List<ApplicationStatusHistory> statusHistory;
 
     public Long getId() {
         return id;
@@ -102,11 +101,11 @@ public class Application {
         this.sesCode = sesCode;
     }
 
-    public List<ApplicationStatusHistoryDTO> getStatusHistory() {
+    public List<ApplicationStatusHistory> getStatusHistory() {
         return statusHistory;
     }
 
-    public void setStatusHistory(List<ApplicationStatusHistoryDTO> statusHistory) {
+    public void setStatusHistory(List<ApplicationStatusHistory> statusHistory) {
         this.statusHistory = statusHistory;
     }
 

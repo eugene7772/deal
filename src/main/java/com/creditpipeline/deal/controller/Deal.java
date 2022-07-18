@@ -2,7 +2,7 @@ package com.creditpipeline.deal.controller;
 
 import com.creditpipeline.deal.dto.*;
 import com.creditpipeline.deal.entity.Application;
-import com.creditpipeline.deal.entity.ApplicationStatusHistoryDTO;
+import com.creditpipeline.deal.entity.ApplicationStatusHistory;
 import com.creditpipeline.deal.entity.Client;
 import com.creditpipeline.deal.entity.LoanOfferDTO;
 import com.creditpipeline.deal.enums.Status;
@@ -12,12 +12,12 @@ import com.creditpipeline.deal.service.ScoringDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,10 +27,14 @@ public class Deal {
     private final ClientService clientService;
     private final ApplicationService applicationService;
     private final ScoringDataService scoringDataService;
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
     private final static Logger logger = LogManager.getLogger(Deal.class);
-    private final static String url = "http://localhost:8087/conveyor/offers";
-    private final static String url2 = "http://localhost:8087/conveyor/calculation";
+
+    @Value("${url}")
+    private String url;
+
+    @Value("${url2}")
+    private String url2;
 
     public Deal(ClientService clientService, ApplicationService applicationService, ScoringDataService scoringDataService) {
         this.clientService = clientService;
@@ -42,8 +46,6 @@ public class Deal {
     @Operation(
             summary = "Расчёт возможных условий кредита")
     public List<LoanOfferDTO> getLoanOffers(@RequestBody @Validated LoanApplicationRequestDTO loanApplicationRequestDTO) {
-        List<LoanOfferDTO> offers = new ArrayList<>();
-        logger.debug("create offers: " + offers);
         Client client = new Client(loanApplicationRequestDTO);
         logger.debug("Create client: " + client);
 
@@ -55,9 +57,11 @@ public class Deal {
 
         Application application = new Application();
         application.setCreationDate(LocalDate.now());
+        application.setClient(client);
+
         applicationService.addApplication(application);
 
-        restTemplate.postForObject(url, offers, PostMapping.class);
+        List<LoanOfferDTO> offers = restTemplate.postForObject(url, loanApplicationRequestDTO, List.class);
 
         for (LoanOfferDTO offerDTO : offers) {
             offerDTO.setApplicationId(application.getId());
@@ -72,12 +76,12 @@ public class Deal {
             summary = "Выбор одного из предложений")
     public void choiceOffer(@RequestBody @Validated LoanOfferDTO loanOfferDTO) {
 
-        Application application = applicationService.getApplicationById(loanOfferDTO.getApplicationId()).get();
+        Application application = applicationService.getApplicationById(loanOfferDTO.getApplicationId()).orElseThrow();
         logger.debug("Create application" + application.getId() + " " + application.getClient() + " " + application.getCredit() + " " + application.getStatus() +
                 " " + application.getCreationDate() + " " + application.getAppliedOffer() + " " + application.getSignDate() + " " + application.getSesCode() + " " + application.getStatusHistory());
 
-        List<ApplicationStatusHistoryDTO> history = application.getStatusHistory();
-        ApplicationStatusHistoryDTO statusHistoryDTO = new ApplicationStatusHistoryDTO();
+        List<ApplicationStatusHistory> history = application.getStatusHistory();
+        ApplicationStatusHistory statusHistoryDTO = new ApplicationStatusHistory();
         statusHistoryDTO.setStatus(Status.APPROVED);
         history.add(statusHistoryDTO);
         application.setStatusHistory(history);
@@ -91,9 +95,9 @@ public class Deal {
     @PutMapping(value = "/calculate/{applicationId}")
     @Operation(
             summary = "Завершение регистрации + полный подсчёт кредита")
-    public void completionOfRegistrationAndFullCreditCalculation(@RequestBody @Validated FinishRegistrationRequestDTO finishRegistrationRequestDTO, @PathVariable(value = "id") Long applicationId) {
+    public void completionOfRegistrationAndFullCreditCalculation(@RequestBody @Validated FinishRegistrationRequestDTO finishRegistrationRequestDTO, @PathVariable(value = "applicationId") Long applicationId) {
 
-        Application application = applicationService.getApplicationById(applicationId).get();
+        Application application = applicationService.getApplicationById(applicationId).orElseThrow();
 
         ScoringDataDTO scoringDataDTO = scoringDataService.getScoringDataDTO(application, finishRegistrationRequestDTO);
 

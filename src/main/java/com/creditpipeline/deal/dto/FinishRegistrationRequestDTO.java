@@ -1,6 +1,6 @@
 package com.creditpipeline.deal.dto;
 
-import com.creditpipeline.deal.entity.EmploymentDTO;
+import com.creditpipeline.deal.entity.Employment;
 import com.creditpipeline.deal.enums.Gender;
 import com.creditpipeline.deal.enums.MaritalStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,7 +17,7 @@ public class FinishRegistrationRequestDTO {
     private Integer dependentAmount;
     private LocalDate passportIssueDate;
     private String passportIssueBranch;
-    private EmploymentDTO employmentDTO;
+    private Employment employment;
     private String account;
 
     public Gender getGender() {
@@ -60,12 +60,12 @@ public class FinishRegistrationRequestDTO {
         this.passportIssueBranch = passportIssueBranch;
     }
 
-    public EmploymentDTO getEmploymentDTO() {
-        return employmentDTO;
+    public Employment getEmployment() {
+        return employment;
     }
 
-    public void setEmploymentDTO(EmploymentDTO employmentDTO) {
-        this.employmentDTO = employmentDTO;
+    public void setEmployment(Employment employment) {
+        this.employment = employment;
     }
 
     public String getAccount() {
@@ -84,7 +84,7 @@ public class FinishRegistrationRequestDTO {
                 ", dependentAmount=" + dependentAmount +
                 ", passportIssueDate=" + passportIssueDate +
                 ", passportIssueBranch='" + passportIssueBranch + '\'' +
-                ", employmentDTO=" + employmentDTO +
+                ", employment=" + employment +
                 ", account='" + account + '\'' +
                 '}';
     }

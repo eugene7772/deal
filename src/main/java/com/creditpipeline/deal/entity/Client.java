@@ -15,26 +15,34 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinColumn(name = "id_client")
     private Long id;
     private String lastName;
     private String firstName;
     private String middleName;
     private LocalDate birthdate;
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
+
     private Integer dependentAmount;
     private String passportSeries;
     private String passportNumber;
     private LocalDate issueDate;
     private String issueBranch;
+
+    @Enumerated(EnumType.STRING)
     private EmploymentStatus employmentStatus;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_credit")
-    private EmploymentDTO employer;
+    @JoinColumn(name = "id_employee")
+    private Employment employer;
     private Integer salary;
+
+    @Enumerated(EnumType.STRING)
     private Position position;
     private Integer workExperienceTotal;
     private Integer workExperienceCurrent;
@@ -166,11 +174,11 @@ public class Client {
         this.employmentStatus = employmentStatus;
     }
 
-    public EmploymentDTO getEmployer() {
+    public Employment getEmployer() {
         return employer;
     }
 
-    public void setEmployer(EmploymentDTO employer) {
+    public void setEmployer(Employment employer) {
         this.employer = employer;
     }
 
@@ -223,20 +231,20 @@ public class Client {
                 ", middleName='" + middleName + '\'' +
                 ", birthdate=" + birthdate +
                 ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
+                ", gender=" + gender +
                 ", maritalStatus=" + maritalStatus +
                 ", dependentAmount=" + dependentAmount +
                 ", passportSeries='" + passportSeries + '\'' +
                 ", passportNumber='" + passportNumber + '\'' +
                 ", issueDate=" + issueDate +
                 ", issueBranch='" + issueBranch + '\'' +
-                ", employmentStatus='" + employmentStatus + '\'' +
-                ", employer='" + employer + '\'' +
+                ", employmentStatus=" + employmentStatus +
+                ", employer=" + employer +
                 ", salary=" + salary +
-                ", position='" + position + '\'' +
+                ", position=" + position +
                 ", workExperienceTotal=" + workExperienceTotal +
                 ", workExperienceCurrent=" + workExperienceCurrent +
-                ", account=" + account +
+                ", account='" + account + '\'' +
                 '}';
     }
 }
