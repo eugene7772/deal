@@ -24,6 +24,7 @@ public class Application {
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
+
     private LocalDate creationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - includeAll:
+      path: included
+      relativeToChangelogFile: true
+      file: db/changelog/changeset/create-application-table.yaml

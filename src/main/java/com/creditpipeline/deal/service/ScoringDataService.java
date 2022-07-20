@@ -26,7 +26,7 @@ public class ScoringDataService {
         scoringDataDTO.setPassportIssueBranch(finishRegistrationRequestDTO.getPassportIssueBranch());
         scoringDataDTO.setMaritalStatus(finishRegistrationRequestDTO.getMaritalStatus());
         scoringDataDTO.setDependentAmount(finishRegistrationRequestDTO.getDependentAmount());
-        scoringDataDTO.setEmploymentDTO(finishRegistrationRequestDTO.getEmploymentDTO());
+        scoringDataDTO.setEmployment(finishRegistrationRequestDTO.getEmployment());
         scoringDataDTO.setInsuranceEnabled(application.getCredit().getInsuranceEnabled());
         scoringDataDTO.setSalaryClient(application.getCredit().getSalaryClient());
 
