@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-history
+      author: Eugene
+      changes:
+        - createTable:
+            tableName: history
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: change_type
+                  type: integer
+              - column:
+                  name: status
+                  type: integer
+              - column:
+                  name: time
+                  type: date

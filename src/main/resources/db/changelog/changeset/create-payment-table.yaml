@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-payment
+      author: Eugene
+      changes:
+        - createTable:
+            tableName: payment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+              - column:
+                  name: debt_payment
+                  type: numeric
+              - column:
+                  name: interest_payment
+                  type: numeric
+              - column:
+                  name: number
+                  type: integer
+              - column:
+                  name: remaining_debt
+                  type: numeric
+              - column:
+                  name: total_payment
+                  type: numeric

@@ -1,7 +1,4 @@
 databaseChangeLog:
-  - preConditions:
-     - runningAs:
-         username:  liquibase
   - changeSet:
       id: create-application
       author: Eugene
@@ -13,41 +10,27 @@ databaseChangeLog:
                   name: id
                   type: bigint
                   autoIncrement: true
-                  constrains:
+                  constraints:
                     primaryKey: true
-                    nullable: false
-              - column:
-                  name: creation_date
-                  type: date
-                  constrains:
-                    nullable: false
-              - column:
-                  name: ses_code
-                  type: character varying(255)
-                  constrains:
-                    nullable: false
-              - column:
-                  name: sign_date
-                  type: date
-                  constrains:
-                    nullable: false
-              - column:
-                  name: status
-                  type: integer
-                  constrains:
-                    nullable: false
-              - column:
-                  name: id_offer
-                  type: bigint
-                  constrains:
                     nullable: false
               - column:
                   name: id_client
                   type: bigint
-                  constrains:
-                    nullable: false
               - column:
                   name: id_credit
                   type: bigint
-                  constrains:
-                    nullable: false
+              - column:
+                  name: status
+                  type: integer
+              - column:
+                  name: creation_date
+                  type: date
+              - column:
+                  name: ses_code
+                  type: character varying(255)
+              - column:
+                  name: sign_date
+                  type: date
+              - column:
+                  name: id_offer
+                  type: bigint

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-credit_payment_schedule
+      author: Eugene
+      changes:
+        - createTable:
+            tableName: credit_payment_schedule
+            columns:
+              - column:
+                  name: credit_id
+                  type: bigint
+              - column:
+                  name: payment_schedule_id
+                  type: bigint

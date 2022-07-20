@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-offer
+      author: Eugene
+      changes:
+        - createTable:
+            tableName: offer
+            columns:
+              - column:
+                  name: application_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: is_insurance_enabled
+                  type: boolean
+              - column:
+                  name: is_salary_client
+                  type: boolean
+              - column:
+                  name: monthly_payment
+                  type: numeric
+              - column:
+                  name: rate
+                  type: numeric
+              - column:
+                  name: requested_amount
+                  type: numeric
+              - column:
+                  name: term
+                  type: integer

@@ -30,11 +30,11 @@ public class Deal {
     private final RestTemplate restTemplate = new RestTemplate();
     private final static Logger logger = LogManager.getLogger(Deal.class);
 
-    @Value("${url}")
-    private String url;
+    //@Value("${url}")
+    private String url = "http://localhost:8087/conveyor/offers";
 
-    @Value("${url2}")
-    private String url2;
+    //@Value("${url2}")
+    private String url2="http://localhost:8087/conveyor/calculation";
 
     public Deal(ClientService clientService, ApplicationService applicationService, ScoringDataService scoringDataService) {
         this.clientService = clientService;
