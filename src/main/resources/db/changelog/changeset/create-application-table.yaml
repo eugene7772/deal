@@ -16,21 +16,35 @@ databaseChangeLog:
               - column:
                   name: id_client
                   type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: id_credit
                   type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: status
                   type: integer
+                  constraints:
+                    nullable: false
               - column:
                   name: creation_date
                   type: date
+                  constraints:
+                    nullable: false
               - column:
                   name: ses_code
                   type: character varying(255)
+                  constraints:
+                    nullable: false
               - column:
                   name: sign_date
                   type: date
+                  constraints:
+                    nullable: false
               - column:
                   name: id_offer
                   type: bigint
+                  constraints:
+                    nullable: false

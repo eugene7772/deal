@@ -13,6 +13,7 @@ public class LoanOfferDTO {
 
     private BigDecimal requestedAmount;
 
+    @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
     private Integer term;

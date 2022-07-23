@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
       id: create-offer
-      author: Eugene
+      author: Eugene31
       changes:
         - createTable:
-            tableName: offer
+            tableName: offer_dto
             columns:
               - column:
                   name: application_id
