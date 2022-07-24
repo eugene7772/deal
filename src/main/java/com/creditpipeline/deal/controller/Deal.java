@@ -31,7 +31,7 @@ public class Deal {
     private final RestTemplate restTemplate = new RestTemplate();
     private final static Logger logger = LogManager.getLogger(Deal.class);
 
-   // @Value("${url}")
+    @Value("${url}")
     private String url = "http://localhost:8087/conveyor/offers";
 
     @Value("${url2}")
