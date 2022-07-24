@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,8 +31,8 @@ public class Deal {
     private final RestTemplate restTemplate = new RestTemplate();
     private final static Logger logger = LogManager.getLogger(Deal.class);
 
-    @Value("${url}")
-    private String url;
+   // @Value("${url}")
+    private String url = "http://localhost:8087/conveyor/offers";
 
     @Value("${url2}")
     private String url2;
@@ -53,6 +54,7 @@ public class Deal {
         logger.debug("Save client: " + client);
 
         Application application = new Application();
+        application.setId(0l);
         application.setCreationDate(LocalDate.now());
         application.setClient(client);
 
@@ -77,9 +79,10 @@ public class Deal {
         Application application = applicationService.getApplicationById(loanOfferDTO.getApplicationId()).orElseThrow(() -> new ApplicationException("App exception"));
         logger.debug("Create application: " + application);
 
-        List<ApplicationStatusHistory> history = application.getStatusHistory();
+        List<ApplicationStatusHistory> history = new ArrayList<>();
         ApplicationStatusHistory statusHistoryDTO = new ApplicationStatusHistory();
         statusHistoryDTO.setStatus(Status.APPROVED);
+        statusHistoryDTO.setTime(LocalDate.now());
         history.add(statusHistoryDTO);
         application.setStatusHistory(history);
         application.setStatus(Status.APPROVED);
@@ -94,7 +97,7 @@ public class Deal {
             summary = "Завершение регистрации + полный подсчёт кредита")
     public void completionOfRegistrationAndFullCreditCalculation(@RequestBody @Validated FinishRegistrationRequestDTO finishRegistrationRequestDTO, @PathVariable(value = "applicationId") Long applicationId) {
 
-        Application application = applicationService.getApplicationById(applicationId).orElseThrow();
+        Application application = applicationService.getApplicationById(applicationId).orElseThrow(() -> new ApplicationException("App exception"));
 
         ScoringDataDTO scoringDataDTO = scoringDataService.getScoringDataDTO(application, finishRegistrationRequestDTO);
 
