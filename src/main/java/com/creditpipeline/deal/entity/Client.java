@@ -247,4 +247,5 @@ public class Client {
                 ", account='" + account + '\'' +
                 '}';
     }
+public class Client {
 }

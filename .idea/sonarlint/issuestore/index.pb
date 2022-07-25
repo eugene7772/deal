@@ -8,7 +8,7 @@ m
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 v
 Fsrc/main/java/com/creditpipeline/deal/repository/CreditRepository.java,f\c\fc24b95da60a4dc7a9a9f3a04445169a1429260b
-†
+ï¿½
 Vsrc/main/java/com/creditpipeline/deal/repository/PaymentScheduleElementRepository.java,4\6\4624b555051dffebbfe0c7fe80a9cd75ed0c786e
 m
 =src/main/java/com/creditpipeline/deal/dto/ScoringDataDTO.java,f\7\f718a0701b631dc03fe4300f3b676d1f3fb01198
@@ -16,7 +16,7 @@ m
 Ksrc/main/java/com/creditpipeline/deal/repository/ApplicationRepository.java,d\2\d21d5b768c26ed2e24deb2ee4ae463626cf7befc
 v
 Fsrc/main/java/com/creditpipeline/deal/repository/ClientRepository.java,a\b\ab1f5235f2bbd46d5e362b07b42cb0f573ab4121
-ˆ
+ï¿½
 Xsrc/main/java/com/creditpipeline/deal/repository/ApplicationStatusHistoryRepository.java,e\4\e4f5bd7a87ca02ed07cf77bbd68b9cd07996821f
 |
 Lsrc/main/java/com/creditpipeline/deal/repository/LoanOfferDTORepository.java,9\d\9d93a2e1306a251ca164f00a572fe501961b4032
@@ -44,7 +44,7 @@ y
 Isrc/main/java/com/creditpipeline/deal/exception/ApplicationException.java,7\f\7f1f6c3ce87c53d872d9cc69207ab3311e92d3e8
 n
 >src/main/java/com/creditpipeline/deal/entity/LoanOfferDTO.java,2\7\273a7a27ebc84357a22ab048d14f35d161a2275e
-€
+ï¿½
 Psrc/main/java/com/creditpipeline/deal/exception/ApplicationExceptionHandler.java,2\6\266b8f07aa197b73e1c527d26b23febbe45d1030
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
@@ -54,3 +54,8 @@ h
 8src/main/java/com/creditpipeline/deal/entity/Credit.java,2\5\2590e83c3fea1e7bede18ed81f45fc2bc9d52035
 m
 =src/main/java/com/creditpipeline/deal/entity/Application.java,1\a\1ab76b2c78e0305ba36c2c4298c3eeb9d1adb403
+=======
+T
+$.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
+L
+.idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
