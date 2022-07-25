@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-credit
+      author: Eugene
+      changes:
+        - createTable:
+            tableName: credit
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: numeric
+              - column:
+                  name: credit_status
+                  type: integer
+              - column:
+                  name: is_insurance_enabled
+                  type: boolean
+              - column:
+                  name: is_salary_client
+                  type: boolean
+              - column:
+                  name: monthly_payment
+                  type: integer
+              - column:
+                  name: psk
+                  type: integer
+              - column:
+                  name: rate
+                  type: integer
+              - column:
+                  name: term
+                  type: integer

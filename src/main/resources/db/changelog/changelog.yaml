@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-application-table.yaml
+  - include:
+      file: db/changelog/changeset/create-application_status_history-table.yaml
+  - include:
+      file: db/changelog/changeset/create-history-table.yaml
+  - include:
+      file: db/changelog/changeset/create-client-table.yaml
+  - include:
+      file: db/changelog/changeset/create-credit-table.yaml
+  - include:
+      file: db/changelog/changeset/create-employment-table.yaml
+  - include:
+      file: db/changelog/changeset/create-loan_offer_dto-table.yaml
+  - include:
+      file: db/changelog/changeset/create-payment-table.yaml
+  - include:
+      file: db/changelog/changeset/create-credit_payment_schedule-table.yaml
