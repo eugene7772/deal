@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -67,12 +68,24 @@ public class DealTest {
         loanApplicationRequestDTO.setPassportSeries("2014");
         loanApplicationRequestDTO.setPassportNumber("289543");
 
-        ResponseEntity<List<LoanOfferDTO>> offers2 = new ResponseEntity<List<LoanOfferDTO>>(HttpStatus.ACCEPTED);
+        List<LoanOfferDTO> offerDTOS = new ArrayList<>();
+
+        LoanOfferDTO offer1 = new LoanOfferDTO();
+        offerDTOS.add(offer1);
+
+        LoanOfferDTO offer3 = new LoanOfferDTO();
+        offerDTOS.add(offer3);
+
+        LoanOfferDTO offer4 = new LoanOfferDTO();
+        offerDTOS.add(offer4);
+
+        LoanOfferDTO offer5 = new LoanOfferDTO();
+        offerDTOS.add(offer5);
 
         Mockito.when(restTemplate.exchange(url, HttpMethod.POST, ResponseEntity.ok(loanApplicationRequestDTO) , new ParameterizedTypeReference<List<LoanOfferDTO>>() {}))
-                .thenReturn(offers2);
+                .thenReturn(ResponseEntity.ok(offerDTOS));
         List<LoanOfferDTO> offers = deal.getLoanOffers(ResponseEntity.ok(loanApplicationRequestDTO));
-        Assertions.assertEquals(ResponseEntity.ok(offers2).getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(ResponseEntity.ok(offerDTOS).getStatusCode(), HttpStatus.OK);
         Assertions.assertEquals(ResponseEntity.ok(offers).getStatusCode(), HttpStatus.OK);
 
     }
@@ -263,11 +276,12 @@ public class DealTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity(scoringDataDTO.toString(), headers);
 
-        Mockito.when(applicationService.getApplicationById(4l).orElseThrow(() -> new ApplicationException("App exception"))).thenReturn(application);
+        Mockito.when(applicationService.getApplicationById(4l)).thenReturn(Optional.of(application));
         Mockito.when(scoringDataService.getScoringDataDTO(application, finishRegistrationRequestDTO)).thenReturn(scoringDataDTO);
         Mockito.when(restTemplate.exchange(url2, HttpMethod.POST, entity , new ParameterizedTypeReference<Credit>() {})).thenReturn((ResponseEntity.ok(credit)));
 
-        deal.completionOfRegistrationAndFullCreditCalculation(finishRegistrationRequestDTO,1l);
+        deal.completionOfRegistrationAndFullCreditCalculation(finishRegistrationRequestDTO,4l);
+        Mockito.verify(applicationService).getApplicationById(4l);
 
     }
 

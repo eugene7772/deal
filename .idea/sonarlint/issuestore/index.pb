@@ -48,3 +48,9 @@ n
 Psrc/main/java/com/creditpipeline/deal/exception/ApplicationExceptionHandler.java,2\6\266b8f07aa197b73e1c527d26b23febbe45d1030
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+h
+8src/main/java/com/creditpipeline/deal/entity/Client.java,1\c\1cdee84d20580a61a045c718c1a1a6ebf60c2fbe
+h
+8src/main/java/com/creditpipeline/deal/entity/Credit.java,2\5\2590e83c3fea1e7bede18ed81f45fc2bc9d52035
+m
+=src/main/java/com/creditpipeline/deal/entity/Application.java,1\a\1ab76b2c78e0305ba36c2c4298c3eeb9d1adb403

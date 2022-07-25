@@ -28,7 +28,7 @@ public class Deal {
     private final ClientService clientService;
     private final ApplicationService applicationService;
     private final ScoringDataService scoringDataService;
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
     private final static Logger logger = LogManager.getLogger(Deal.class);
 
     @Value("${url}")
@@ -37,10 +37,11 @@ public class Deal {
     @Value("${url2}")
     private String url2;
 
-    public Deal(ClientService clientService, ApplicationService applicationService, ScoringDataService scoringDataService) {
+    public Deal(ClientService clientService, ApplicationService applicationService, ScoringDataService scoringDataService, RestTemplate restTemplate) {
         this.clientService = clientService;
         this.applicationService = applicationService;
         this.scoringDataService = scoringDataService;
+        this.restTemplate = restTemplate;
     }
 
     @PostMapping(value = "/application")
@@ -60,7 +61,7 @@ public class Deal {
 
         applicationService.addApplication(application);
 
-        ResponseEntity<List<LoanOfferDTO>> responseOffers = restTemplate.exchange(url, HttpMethod.POST, loanApplicationRequestDTO , new ParameterizedTypeReference<List<LoanOfferDTO>>() {});
+        ResponseEntity<List<LoanOfferDTO>> responseOffers = restTemplate.exchange(url, HttpMethod.POST, loanApplicationRequestDTO ,  new ParameterizedTypeReference<List<LoanOfferDTO>>() {});
         List<LoanOfferDTO> offers = responseOffers.getBody();
 
         for (LoanOfferDTO offerDTO : offers) {
@@ -106,7 +107,6 @@ public class Deal {
         HttpEntity<String> entity = new HttpEntity(scoringDataDTO.toString(), headers);
 
         ResponseEntity<Credit> credit = restTemplate.exchange(url2, HttpMethod.POST, entity , new ParameterizedTypeReference<Credit>() {});
-        credit.getBody();
         logger.debug("Post scoringDataDTO to conveyor: " + scoringDataDTO);
 
     }
